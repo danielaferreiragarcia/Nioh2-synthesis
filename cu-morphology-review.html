@@ -1,0 +1,1027 @@
+<title>Cu Morphology Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root {
+    /* Layout: companion to the Ni(OH)2 review. One left-aligned 42rem reading column; verdict, figures and tables widen to 64rem.
+       Palette from the copper oxides themselves: Cu(OH)2 blue ground and accent, cuprite red, tenorite black, metallic copper. */
+    --bg: #f2f5f7;          /* faint Cu(OH)2 blue-grey */
+    --surface: #ffffff;
+    --tint: #e1ebf1;        /* pale Cu(OH)2 blue */
+    --tint-strong: #c6d8e4;
+    --fg: #151c21;
+    --muted: #54616b;
+    --rule: #d1dae0;
+    --accent: #1d6585;      /* azurite / Cu(OH)2 blue */
+    --cu: #a9632f;          /* metallic copper */
+    --cu2o: #b13a2e;        /* cuprite red */
+    --cuo: #262a2e;         /* tenorite black */
+    --cuo-fg: #eef2f4;
+    --on-band: #ffffff;
+    --ni: #2e7a4f;          /* the Ni(OH)2 review's green, for cross-reference */
+    --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+    --measure: 42rem;
+    --wide: 64rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10151a;
+      --surface: #161d23;
+      --tint: #1a2933;
+      --tint-strong: #233a4a;
+      --fg: #e0e8ee;
+      --muted: #9aa8b2;
+      --rule: #29343d;
+      --accent: #7ebfdc;
+      --cu: #d79a64;
+      --cu2o: #e07a6c;
+      --cuo: #3b4249;
+      --cuo-fg: #f1f4f6;
+      --on-band: #10151a;
+      --ni: #7cc39a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10151a;
+    --surface: #161d23;
+    --tint: #1a2933;
+    --tint-strong: #233a4a;
+    --fg: #e0e8ee;
+    --muted: #9aa8b2;
+    --rule: #29343d;
+    --accent: #7ebfdc;
+    --cu: #d79a64;
+    --cu2o: #e07a6c;
+    --cuo: #3b4249;
+    --cuo-fg: #f1f4f6;
+    --on-band: #10151a;
+    --ni: #7cc39a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .page {
+    max-width: var(--wide);
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 48px 88px;
+    display: grid;
+    gap: 64px;
+  }
+  .page > * { min-width: 0; }
+  header > *, section > * { min-width: 0; }
+  .col { width: 100%; max-width: var(--measure); }
+  header, section { display: grid; gap: 14px; align-content: start; }
+  h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  sub, sup { font-size: 0.68em; line-height: 0; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 1.35rem + 2.6vw, 3.05rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.65rem;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.22rem;
+    line-height: 1.25;
+  }
+  .lede { font-size: 1.15rem; line-height: 1.55; color: var(--muted); max-width: 40rem; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* Verdict */
+  .verdict {
+    background: var(--tint);
+    border-radius: 6px;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: 18px 32px;
+  }
+  .verdict-answer {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-top: 8px;
+  }
+  .verdict ul { padding-left: 1.1rem; display: grid; gap: 10px; }
+  .verdict li::marker { color: var(--accent); }
+
+  /* Figures */
+  .figs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  figure {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 18px 20px;
+    display: grid;
+    gap: 14px;
+    align-content: start;
+    min-width: 0;
+  }
+  .fig-scroll { overflow-x: auto; }
+  figure svg { display: block; width: 100%; min-width: 520px; height: auto; }
+  figcaption { font-size: 0.9rem; line-height: 1.5; color: var(--muted); max-width: 52rem; }
+  figcaption strong { color: var(--fg); font-weight: 600; }
+
+  .dg { color: var(--fg); }
+  .dg text { font-family: var(--font-body); fill: currentColor; }
+  .dg .dg-label { font-size: 12.5px; font-weight: 600; }
+  .dg .dg-sub { font-size: 11px; fill: var(--muted); }
+  .dg .dg-mono { font-family: var(--font-mono); font-size: 11px; fill: var(--muted); }
+  .dg .dg-acc-text { font-size: 11.5px; font-weight: 600; fill: var(--accent); }
+  .dg .dg-on-band { font-size: 11px; font-weight: 600; fill: var(--on-band); }
+  .dg .dg-on-cuo { font-size: 11px; font-weight: 600; fill: var(--cuo-fg); }
+  .dg .dg-ni-text { font-size: 11px; font-weight: 600; fill: var(--ni); }
+  .f-hi, .f-mid, .f-lo { fill: var(--cu2o); stroke: currentColor; stroke-width: 1.2; stroke-linejoin: round; }
+  .f-hi { fill-opacity: 0.2; }
+  .f-mid { fill-opacity: 0.42; }
+  .f-lo { fill-opacity: 0.7; }
+  .b-cu { fill: var(--cu); }
+  .b-cu2o { fill: var(--cu2o); }
+  .b-cuo { fill: var(--cuo); }
+  .b-cu3 { fill: var(--accent); }
+  .b-org { fill: var(--accent); fill-opacity: 0.16; stroke: var(--accent); stroke-width: 1.5; }
+  .b-ni { fill: var(--ni); fill-opacity: 0.2; stroke: var(--ni); stroke-width: 1.5; }
+  .grid-line { stroke: var(--rule); stroke-width: 1; }
+  .axis-line { stroke: currentColor; stroke-width: 1.25; }
+  .oer-line { stroke: var(--muted); stroke-width: 1.25; stroke-dasharray: 4 4; }
+  .dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+  /* Evidence tables */
+  .legend { font-size: 0.9rem; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .table-wrap { overflow-x: auto; }
+  table.evidence {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  .evidence th, .evidence td {
+    text-align: left;
+    vertical-align: top;
+    padding: 13px 16px 13px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .evidence th:last-child, .evidence td:last-child { padding-right: 0; }
+  .evidence thead th {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1.5px solid var(--fg);
+    padding-bottom: 8px;
+  }
+  .evidence .group th {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.12rem;
+    color: var(--fg);
+    padding-top: 26px;
+    padding-bottom: 8px;
+  }
+  .evidence col.c-study { width: 17%; }
+  .evidence col.c-sub { width: 13%; }
+  .evidence col.c-comp { width: 30%; }
+  .evidence col.c-find { width: 40%; }
+  .study b { display: block; font-weight: 600; }
+  .study span { display: block; color: var(--muted); font-size: 0.85rem; }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.4;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .tag.vfa { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .flag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    border: 1px dashed var(--muted);
+    border-radius: 3px;
+    padding: 0 5px;
+    white-space: nowrap;
+  }
+
+  /* Ni vs Cu comparison */
+  table.compare { width: 100%; border-collapse: collapse; font-size: 0.92rem; line-height: 1.5; }
+  .compare th, .compare td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: 1px solid var(--rule); }
+  .compare th:last-child, .compare td:last-child { padding-right: 0; }
+  .compare thead th {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1.5px solid var(--fg);
+    padding-bottom: 8px;
+  }
+  .compare tbody th { font-weight: 600; width: 22%; }
+  .compare .ni-head { color: var(--ni); }
+  .compare .cu-head { color: var(--cu2o); }
+
+  /* Factors */
+  .factors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .factor { display: grid; gap: 8px; align-content: start; border-top: 2px solid var(--fg); padding-top: 14px; }
+  .factor p { font-size: 0.95rem; }
+
+  /* Recipes */
+  .recipes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .recipe {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 20px 20px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    min-width: 0;
+  }
+  .recipe h3 { font-size: 1.12rem; }
+  .recipe .src { font-size: 0.85rem; color: var(--muted); }
+  .recipe ol { padding-left: 1.2rem; display: grid; gap: 6px; font-size: 0.93rem; }
+  .vols { width: 100%; border-collapse: collapse; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .vols th, .vols td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--rule); }
+  .vols thead th { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .vols td:not(:first-child), .vols thead th:not(:first-child) { text-align: right; }
+
+  /* Checklist */
+  .checks { list-style: none; padding: 0; display: grid; border-top: 1px solid var(--rule); }
+  .checks li {
+    display: grid;
+    grid-template-columns: 1.4rem minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .checks input { width: 1.1rem; height: 1.1rem; margin: 0.28rem 0 0; accent-color: var(--accent); cursor: pointer; }
+  .checks label { cursor: pointer; }
+  .checks strong { font-weight: 600; }
+  .checks li:has(input:checked) label { color: var(--muted); }
+  .small { font-size: 0.85rem; color: var(--muted); }
+
+  .plain { padding-left: 1.1rem; display: grid; gap: 8px; }
+
+  /* Sources */
+  .refs { list-style: none; padding: 0; display: grid; gap: 14px; font-size: 0.9rem; line-height: 1.5; }
+  .refs li { display: grid; gap: 2px; }
+  .refs a { font-family: var(--font-mono); font-size: 0.78rem; overflow-wrap: anywhere; }
+  .refs h3 { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+
+  @media (max-width: 860px) {
+    .factors { grid-template-columns: minmax(0, 1fr); }
+    .recipes { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .verdict { grid-template-columns: minmax(0, 1fr); padding: 22px; }
+  }
+  @media (max-width: 700px) {
+    .page { gap: 52px; padding-block: 32px 64px; }
+    .evidence thead, .compare thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .evidence colgroup { display: none; }
+    .evidence, .evidence tbody, .evidence tr, .evidence th, .evidence td,
+    .compare, .compare tbody, .compare tr, .compare th, .compare td { display: block; width: 100%; }
+    .evidence tr, .compare tr { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+    .evidence tr.group { padding: 0; border-bottom: 1.5px solid var(--fg); }
+    .evidence td, .compare td, .compare tbody th { border: 0; padding: 3px 0; }
+    .evidence td::before, .compare td::before {
+      content: attr(data-label);
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .evidence td.study::before { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<main class="page">
+
+  <header class="col">
+    <p class="eyebrow">Literature check · Copper anodes, electro-oxidation of organics</p>
+    <h1>Do copper crystal shapes change how organics oxidize to VFAs?</h1>
+    <p class="lede">What has been published on how the shape, exposed facets and phase of Cu, Cu<sub>2</sub>O and CuO change activity and carboxylate selectivity when organics are oxidized at a copper anode, and how to run the comparison yourself. A companion to the Ni(OH)<sub>2</sub> morphology review.</p>
+    <p class="meta"><span>Compiled October 2026</span><span>153 records screened, 40 cited</span><span>From abstracts and excerpts</span></p>
+  </header>
+
+  <section class="verdict" aria-labelledby="verdict-h">
+    <div>
+      <p class="eyebrow" id="verdict-h">Short answer</p>
+      <p class="verdict-answer">No direct study yet</p>
+    </div>
+    <ul>
+      <li>No paper compares Cu shapes or facets while measuring formate, acetate or other carboxylate products. Three separate searches aimed at finding one came back empty.</li>
+      <li>The direct Cu<sub>2</sub>O shape comparisons are glucose sensors that report current, not products. Even there, labs disagree on the winner: cubes in one study, octahedra in another, rhombic dodecahedra in a third.</li>
+      <li>Under anodic bias the as-made facets do not survive. Cu<sub>2</sub>O surfaces turn into CuO or Cu(OH)<sub>2</sub>, and phase, defects, pH, potential and the substrate set the products more clearly than the outline shape.</li>
+      <li>On copper anodes the VFA-type products are mostly formate, from C–C cleavage of polyols and sugars, and acetate, from ethanol. Nothing builds C–C bonds, so propionate and butyrate would need C3 and C4 feeds.</li>
+    </ul>
+  </section>
+
+  <section id="closest" aria-labelledby="closest-h">
+    <div class="col" style="display:grid;gap:14px">
+      <h2 id="closest-h">The closest comparisons disagree</h2>
+      <p>Shape-controlled Cu<sub>2</sub>O is easy to make, so cubes, octahedra and rhombic dodecahedra have been compared many times. For organic oxidation every one of those comparisons is a glucose sensor, and the winning facet changes from lab to lab.</p>
+    </div>
+    <div class="figs">
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 640 245" role="img" aria-label="Three Cu2O polyhedra. A cube bounded by {100} facets was most active for glucose in Pastrián 2018. An octahedron bounded by {111} facets was most sensitive for glucose in Tang 2016. A rhombic dodecahedron bounded by {110} facets was most active per unit area in a Chem. Eng. J. study from about 2020.">
+          <g class="dg">
+            <polygon class="f-hi" points="151.9,66.9 122.8,44.6 68.1,56.5 97.2,78.7"/>
+            <polygon class="f-mid" points="97.2,78.7 68.1,56.5 68.1,113.1 97.2,135.4"/>
+            <polygon class="f-lo" points="151.9,66.9 151.9,123.5 97.2,135.4 97.2,78.7"/>
+
+            <polygon class="f-lo" points="373.2,84.8 320.0,145.6 341.5,102.9"/>
+            <polygon class="f-lo" points="373.2,84.8 320.0,34.4 341.5,102.9"/>
+            <polygon class="f-mid" points="266.8,95.2 320.0,145.6 341.5,102.9"/>
+            <polygon class="f-hi" points="266.8,95.2 320.0,34.4 341.5,102.9"/>
+
+            <polygon class="f-lo" points="583.1,82.4 565.2,72.8 530.0,39.8 547.9,49.5"/>
+            <polygon class="f-lo" points="530.0,140.2 565.2,122.9 547.2,113.3 512.1,130.5"/>
+            <polygon class="f-lo" points="583.1,82.4 565.2,72.8 547.2,113.3 565.2,122.9"/>
+            <polygon class="f-hi" points="476.9,97.6 512.1,80.3 530.0,39.8 494.8,57.1"/>
+            <polygon class="f-mid" points="476.9,97.6 512.1,80.3 547.2,113.3 512.1,130.5"/>
+            <polygon class="f-mid" points="530.0,39.8 565.2,72.8 547.2,113.3 512.1,80.3"/>
+
+            <text x="110" y="170" text-anchor="middle" class="dg-label">Cube</text>
+            <text x="110" y="186" text-anchor="middle" class="dg-mono">{100}</text>
+            <text x="110" y="212" text-anchor="middle" class="dg-acc-text">Most active for glucose</text>
+            <text x="110" y="228" text-anchor="middle" class="dg-sub">Pastrián 2018</text>
+
+            <text x="320" y="170" text-anchor="middle" class="dg-label">Octahedron</text>
+            <text x="320" y="186" text-anchor="middle" class="dg-mono">{111}</text>
+            <text x="320" y="212" text-anchor="middle" class="dg-acc-text">Most sensitive for glucose</text>
+            <text x="320" y="228" text-anchor="middle" class="dg-sub">Tang 2016</text>
+
+            <text x="530" y="170" text-anchor="middle" class="dg-label">Rhombic dodecahedron</text>
+            <text x="530" y="186" text-anchor="middle" class="dg-mono">{110}</text>
+            <text x="530" y="212" text-anchor="middle" class="dg-acc-text">Most active per area</text>
+            <text x="530" y="228" text-anchor="middle" class="dg-sub">Chem. Eng. J., c. 2020</text>
+          </g>
+        </svg>
+        </div>
+        <figcaption><strong>Cu<sub>2</sub>O polyhedra and the facet each one exposes.</strong> Each study measured sensor current for glucose, not products. Pastrián et al. also found the order of stability reversed, with octahedra most stable, and Kusior saw (111) surfaces change during the reaction. The shapes also differ in conductivity: octahedra conduct well, cubes moderately, and rhombic dodecahedra not at all up to 5 V in a two-probe test (Tan et al., 2015). Part of any ranking may come from how well each shape is wired to the electrode.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="mechanism" aria-labelledby="mechanism-h">
+    <div class="col" style="display:grid;gap:14px">
+      <h2 id="mechanism-h">Why shape matters less for copper</h2>
+      <p>Copper oxidizes organics in two separate potential windows, and in both the surface you made is not the surface that reacts. Metallic Cu dehydrogenates aldehydes near 0 V vs RHE and releases H<sub>2</sub> at the anode, until Cu itself oxidizes near 0.5 V. Polyols, sugars and alcohols react on Cu(II) oxide at roughly 1.2–1.5 V.</p>
+    </div>
+    <div class="figs">
+      <figure>
+        <div class="fig-scroll">
+        <svg viewBox="0 0 640 282" role="img" aria-label="Potential ladder from 0 to 1.8 V versus RHE. The copper surface is metallic below 0.47 V, Cu2O from 0.47 to 0.67 V, Cu(II) oxide from 0.67 V, and Cu(III) is seen only from 1.62 V. Aldehydes are oxidized on metallic copper below about 0.45 V. Polyols, sugars and alcohols are oxidized on Cu(II) oxide at about 1.2 to 1.5 V. The Ni(II) to Ni(III) wave of NiOOH sits at 1.35 to 1.45 V. The O2/H2O equilibrium is 1.23 V.">
+          <g class="dg">
+            <line class="grid-line" x1="170" y1="44" x2="170" y2="214"/>
+            <line class="grid-line" x1="243.3" y1="44" x2="243.3" y2="214"/>
+            <line class="grid-line" x1="316.7" y1="44" x2="316.7" y2="214"/>
+            <line class="grid-line" x1="390" y1="44" x2="390" y2="214"/>
+            <line class="grid-line" x1="463.3" y1="44" x2="463.3" y2="214"/>
+            <line class="grid-line" x1="536.7" y1="44" x2="536.7" y2="214"/>
+            <line class="grid-line" x1="610" y1="44" x2="610" y2="214"/>
+
+            <line class="oer-line" x1="470.7" y1="40" x2="470.7" y2="214"/>
+            <text x="470.7" y="32" text-anchor="middle" class="dg-sub">1.23 V, O₂/H₂O</text>
+
+            <text x="16" y="64" class="dg-label">Copper surface</text>
+            <text x="16" y="79" class="dg-sub">stable phase</text>
+            <rect class="b-cu" x="170" y="52" width="114.9" height="28"/>
+            <rect class="b-cu2o" x="284.9" y="52" width="48.9" height="28"/>
+            <rect class="b-cuo" x="333.8" y="52" width="232.2" height="28"/>
+            <rect class="b-cu3" x="566" y="52" width="44" height="28"/>
+            <text x="227.4" y="70" text-anchor="middle" class="dg-on-band">Cu⁰ metal</text>
+            <text x="309.3" y="70" text-anchor="middle" class="dg-on-band">Cu₂O</text>
+            <text x="449.9" y="70" text-anchor="middle" class="dg-on-cuo">Cu²⁺: CuO, Cu(OH)₂</text>
+            <text x="588" y="70" text-anchor="middle" class="dg-on-band">Cu³⁺</text>
+
+            <text x="16" y="124" class="dg-label">Organics on Cu</text>
+            <text x="16" y="139" class="dg-sub">reported windows</text>
+            <rect class="b-org" x="170" y="106" width="110" height="20" rx="3"/>
+            <text x="290" y="120" class="dg-acc-text halo">aldehydes → acid + H₂, on Cu⁰</text>
+            <rect class="b-org" x="463.3" y="140" width="73.4" height="20" rx="3"/>
+            <text x="455" y="154" text-anchor="end" class="dg-acc-text halo">polyols, sugars → formate; ethanol → acetate</text>
+
+            <text x="16" y="190" class="dg-label">NiOOH, compared</text>
+            <text x="16" y="205" class="dg-sub">your Ni(OH)₂ review</text>
+            <rect class="b-ni" x="500" y="180" width="24.4" height="20" rx="3"/>
+            <text x="492" y="194" text-anchor="end" class="dg-ni-text halo">Ni²⁺→Ni³⁺ wave, the NiOOH oxidant forms</text>
+
+            <line class="axis-line" x1="170" y1="226" x2="610" y2="226"/>
+            <line class="axis-line" x1="170" y1="226" x2="170" y2="231"/>
+            <line class="axis-line" x1="243.3" y1="226" x2="243.3" y2="231"/>
+            <line class="axis-line" x1="316.7" y1="226" x2="316.7" y2="231"/>
+            <line class="axis-line" x1="390" y1="226" x2="390" y2="231"/>
+            <line class="axis-line" x1="463.3" y1="226" x2="463.3" y2="231"/>
+            <line class="axis-line" x1="536.7" y1="226" x2="536.7" y2="231"/>
+            <line class="axis-line" x1="610" y1="226" x2="610" y2="231"/>
+            <text x="170" y="245" text-anchor="middle" class="dg-mono">0</text>
+            <text x="243.3" y="245" text-anchor="middle" class="dg-mono">0.3</text>
+            <text x="316.7" y="245" text-anchor="middle" class="dg-mono">0.6</text>
+            <text x="390" y="245" text-anchor="middle" class="dg-mono">0.9</text>
+            <text x="463.3" y="245" text-anchor="middle" class="dg-mono">1.2</text>
+            <text x="536.7" y="245" text-anchor="middle" class="dg-mono">1.5</text>
+            <text x="610" y="245" text-anchor="middle" class="dg-mono">1.8</text>
+            <text x="390" y="270" text-anchor="middle" class="dg-sub">E vs RHE (V)</text>
+          </g>
+        </svg>
+        </div>
+        <figcaption><strong>Where each reaction runs, on one potential scale.</strong> Phase boundaries are thermodynamic: Cu/Cu<sub>2</sub>O at 0.47 V and Cu<sub>2</sub>O/CuO at 0.67 V vs RHE. Pure Cu oxidizes to Cu<sup>+</sup> near 0.5 V in 1 M KOH (Li et al., 2023). In situ Raman sees a Cu(III) oxide only at 1.62 V or above in 0.1 M KOH (Deng et al., 2016), so copper's high-valent species forms at or after the onset of oxygen evolution. NiOOH's oxidant forms before it. The organic windows are the potentials used in the cited electrolyses, not hard limits.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="evidence" aria-labelledby="evidence-h">
+    <div class="col" style="display:grid;gap:14px">
+      <h2 id="evidence-h">What the studies found</h2>
+      <p>Read the first two groups for shape effects and the last group for VFA-type products. No study appears in both.</p>
+      <p class="legend"><span class="tag vfa">formate</span> Filled tags mark studies that quantified a VFA-type carboxylate.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="evidence">
+        <colgroup><col class="c-study"><col class="c-sub"><col class="c-comp"><col class="c-find"></colgroup>
+        <thead>
+          <tr><th scope="col">Study</th><th scope="col">Substrate</th><th scope="col">What was compared</th><th scope="col">Finding</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><th colspan="4" scope="colgroup">Cu<sub>2</sub>O shape comparisons (sensor current only)</th></tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Pastrián et al., 2018</b><span><i>ACS Catal.</i></span></td>
+            <td data-label="Substrate"><span class="tag">glucose</span></td>
+            <td data-label="Compared">Cubes vs cuboctahedra vs octahedra, plus DFT</td>
+            <td data-label="Finding">Activity cubes &gt; cuboctahedra &gt; octahedra; stability in the reverse order. Glucose binds more strongly on {100}; {111} has fewer oxygen vacancies.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Dourado et al., 2019</b><span><i>J. Catal.</i></span></td>
+            <td data-label="Substrate"><span class="tag">glucose</span></td>
+            <td data-label="Compared">The same group's cubes and octahedra, by in situ FTIR</td>
+            <td data-label="Finding">Follow-up showing the oxidation mechanism depends on the exposed facet. Product assignments were not checked here.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Tang et al., 2016</b><span><i>New J. Chem.</i></span></td>
+            <td data-label="Substrate"><span class="tag">glucose</span></td>
+            <td data-label="Compared">Cubes vs octahedra</td>
+            <td data-label="Finding">Octahedra gave much higher sensitivity, a wider linear range and a lower detection limit, the opposite of Pastrián et al.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Kusior, 2022</b><span><i>Sensors</i></span></td>
+            <td data-label="Substrate"><span class="tag">glucose</span></td>
+            <td data-label="Compared">Cu<sub>2</sub>O enclosed by (100) vs (111) planes</td>
+            <td data-label="Finding">(111) was more active, but its surface changed during the reaction. (100) gave the best sensitivity and range. Nafion–particle interaction also shifted the response.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Won &amp; Stanciu, 2012</b><span><i>Sensors</i></span></td>
+            <td data-label="Substrate"><span class="tag">glucose</span></td>
+            <td data-label="Compared">Cubes, truncated octahedra, octahedra, hexapods</td>
+            <td data-label="Finding">Octahedra and hexapods gave detection limits of 0.51 and 0.60 mM. Shape changed sensitivity more than detection limit.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Chem. Eng. J. study, c. 2020</b><span><span class="flag">authors and DOI unconfirmed</span></span></td>
+            <td data-label="Substrate"><span class="tag">glucose</span></td>
+            <td data-label="Compared">Rhombic dodecahedra vs octahedra vs cubes, normalized to real surface area</td>
+            <td data-label="Finding">Rhombic dodecahedra most active, with the lowest apparent activation energy (65.4 vs 91.8 vs 97.4 kJ mol⁻¹). Two-electron route to gluconolactone proposed.</td>
+          </tr>
+
+          <tr class="group"><th colspan="4" scope="colgroup">Other copper shape and facet comparisons</th></tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Lee et al., 2021</b><span><i>Small</i></span></td>
+            <td data-label="Substrate"><span class="tag">methanol</span></td>
+            <td data-label="Compared">Metallic Cu nanocubes {100} vs spheres vs octahedra {111}</td>
+            <td data-label="Finding">Facet-dependent activity for methanol oxidation. The abstract reports no product analysis.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Pascual-Llorens et al., 2026</b><span><i>J. Mater. Chem. A</i></span></td>
+            <td data-label="Substrate"><span class="tag">HMF</span></td>
+            <td data-label="Compared">Cu(111) and polycrystalline Cu refaceted by potential pulses into different terrace and step densities</td>
+            <td data-label="Finding">Undercoordinated Cu sites speed HMF oxidation. Activity and onset only in the accessible text; products would be furan acids, not VFAs.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Leitner et al., 2025</b><span><i>ACS Nano</i></span></td>
+            <td data-label="Substrate"><span class="tag">CO</span></td>
+            <td data-label="Compared">Cu(100) vs Cu(111) single crystals, in situ STM</td>
+            <td data-label="Finding">Both facets restructure into undercoordinated adatoms that do the catalysis; Cu(111) reversibly, Cu(100) less so.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Ma et al., 2022</b><span><i>Nano Today</i></span></td>
+            <td data-label="Substrate"><span class="tag">outer-sphere probe</span></td>
+            <td data-label="Compared">~300 nm Cu<sub>2</sub>O cubes, cuboctahedra, octahedra, rhombic dodecahedra by AFM-SECM</td>
+            <td data-label="Finding">Rhombic dodecahedra most electrochemically active with a [Ru(NH<sub>3</sub>)<sub>6</sub>]<sup>3+</sup> probe.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Shan et al., 2022</b><span><i>Chin. Chem. Lett.</i></span></td>
+            <td data-label="Substrate"><span class="tag">OER only</span></td>
+            <td data-label="Compared">Single Cu<sub>2</sub>O octahedra vs single cubes, by SECCM</td>
+            <td data-label="Finding">Octahedra far more active, cubes almost inert. TOF on {111} at 1.97 V vs RHE rose from 4 to 115 s⁻¹ as edge length fell from 1.3 µm to 100 nm.</td>
+          </tr>
+
+          <tr class="group"><th colspan="4" scope="colgroup">Morphology or phase comparisons with product data</th></tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Chuang &amp; Lai, 2022</b><span><i>Catal. Sci. Technol.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">glucose → formate</span></td>
+            <td data-label="Compared">Monoclinic CuO vs Cu foil vs pre-oxidized Cu foil, 1.5 V vs RHE, 0.1 M NaOH</td>
+            <td data-label="Finding">Formate FE 94.1% on CuO vs 83.6% and 82.0% on the foils. The closest thing to a shape test with VFA data, but it varies phase, not facet. Rice straw gave 41.4%.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Yan et al., 2025</b><span><i>Chem. Sci.</i></span></td>
+            <td data-label="Substrate"><span class="tag">benzyl alcohol</span></td>
+            <td data-label="Compared">Au on CuO nanowires vs nanosheets vs nanoparticles, on Cu foam</td>
+            <td data-label="Finding">Nanowires: 734 mA cm⁻² at 1.5 V vs RHE, 91% FE to benzoic acid, and a rate 3.6× the nanosheets and 5.1× the nanoparticles. Au is present, so this is not bare copper.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Nam, Taitt &amp; Choi, 2018</b><span><i>ACS Catal.</i></span></td>
+            <td data-label="Substrate"><span class="tag">HMF → FDCA</span></td>
+            <td data-label="Compared">Nanocrystalline (foam) Cu vs bulk Cu anode</td>
+            <td data-label="Finding">FDCA yield 96.4% vs 80.8%, with FFCA left over on bulk Cu. Oxidized Cu barely evolves O<sub>2</sub>, which leaves a wide working window.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Sun et al., 2024</b><span><i>Chem. Commun.</i></span></td>
+            <td data-label="Substrate"><span class="tag">benzyl alcohol</span></td>
+            <td data-label="Compared">Cu wires of different phase on Cu foam</td>
+            <td data-label="Finding">CuO nanowires best: 200 mA cm⁻² at 1.39 V with high benzoic acid selectivity.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Dey et al., 2022</b><span><i>Nano Select</i></span></td>
+            <td data-label="Substrate"><span class="tag">methanol</span></td>
+            <td data-label="Compared">Plasma-grown vs thermally grown CuO nanowires of the same shape</td>
+            <td data-label="Finding">Defect-rich plasma nanowires gave about twice the methanol oxidation activity. Same shape, different defects.</td>
+          </tr>
+
+          <tr class="group"><th colspan="4" scope="colgroup">Copper anodes that make VFA-type acids (one material each)</th></tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Khan et al., 2022</b><span><i>Commun. Chem.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">ethanol → acetate</span></td>
+            <td data-label="Compared">Oxygen-vacancy-rich CuO nanosheets on Cu foam</td>
+            <td data-label="Finding">About 100% selectivity to acetate from ethanol and formate from methanol, stable 24 h above 200 mA cm⁻².</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Oh et al., 2023</b><span><i>Adv. Mater.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">glycerol → formate</span></td>
+            <td data-label="Compared">Cu oxide and CuCo oxide vs Au and Pt</td>
+            <td data-label="Finding">Cu oxides gave about 90% combined glycolic plus formic acid; Au and Pt gave mainly glyceric and glycolic acid. DFT puts formate formation directly on the Cu oxide surface.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Meng et al., 2025</b><span><i>Green Chem.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">glycerol → formate</span></td>
+            <td data-label="Compared">Pt-decorated CuO nanorods</td>
+            <td data-label="Finding">97.4% formic acid selectivity at near-full conversion, 1.40 V vs RHE; 20 mA cm⁻² at 1.14 V.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Fan et al., 2023</b><span><i>Nano-Micro Lett.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">glycerol → formate</span></td>
+            <td data-label="Compared">S-doped CuO nanorod arrays on Cu foam</td>
+            <td data-label="Finding">100 and 500 mA cm⁻² at 1.23 and 1.33 V vs RHE. Products formic and glycolic acid.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Braun et al., 2022</b><span><i>ChemElectroChem</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">glycerol → formate</span></td>
+            <td data-label="Compared">Cu–Co hydroxycarbonates across the full Cu/Co range</td>
+            <td data-label="Finding">Ethylene glycol and glycerol leached Cu from the catalyst, and the leached catalyst made more formic acid.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Xia et al., 2024</b><span><i>Adv. Funct. Mater.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">methanol → formate</span></td>
+            <td data-label="Compared">Cu–CuO–Cu<sub>2</sub>O nanowires</td>
+            <td data-label="Finding">About 100% FE to formate for over 100 h at 100 mA cm⁻². Methanol itself drives CuO back to Cu<sub>2</sub>O.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Han et al., 2020</b><span><i>ACS Catal.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">glycerol → formate</span></td>
+            <td data-label="Compared">MCo<sub>2</sub>O<sub>4</sub> spinels, M = Mn to Zn</td>
+            <td data-label="Finding">CuCo<sub>2</sub>O<sub>4</sub> was best, with about 80% formate selectivity at pH 13.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Li et al., 2023</b><span><i>Nat. Commun.</i></span></td>
+            <td data-label="Substrate"><span class="tag vfa">formaldehyde → formate</span></td>
+            <td data-label="Compared">Cu, Ag and Cu–Ag alloys</td>
+            <td data-label="Finding">Cu<sub>3</sub>Ag<sub>7</sub> anode releases H<sub>2</sub> while making formate; the cell reaches 500 mA cm⁻² at 0.60 V.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Ostervold et al., 2021</b><span><i>RSC Adv.</i></span></td>
+            <td data-label="Substrate"><span class="tag">glucose → lactic acid</span></td>
+            <td data-label="Compared">Electro-oxidized Cu(II) electrode</td>
+            <td data-label="Finding">Lactic acid yield 23.3%, selectivity 31.1% at 1.46 V vs RHE in 1 M NaOH. A route through dissolved Cu<sup>2+</sup> is proposed.</td>
+          </tr>
+          <tr>
+            <td class="study" data-label="Study"><b>Liu et al., 2020</b><span><i>Appl. Catal. B</i></span></td>
+            <td data-label="Substrate"><span class="tag">glycerol → DHA</span></td>
+            <td data-label="Compared">CuO across electrolyte pH</td>
+            <td data-label="Finding">Near pH 9 CuO gives mainly dihydroxyacetone, a C3 ketone. The formate-selective reports above all use 0.1–1 M hydroxide.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="factors" aria-labelledby="factors-h">
+    <h2 id="factors-h" class="col">What decides the products instead</h2>
+    <div class="factors">
+      <div class="factor">
+        <h3>The substrate</h3>
+        <p>Copper oxides cut C–C bonds that sit next to OH or C=O groups. Glycerol, ethylene glycol and glucose give mostly formate, with glycolate or lactate on the side; ethanol stops at acetate. No copper anode joins carbons, so propionate or butyrate would have to come from 1-propanol, 1-butanol or their aldehydes, and the search found no copper study of those.</p>
+      </div>
+      <div class="factor">
+        <h3>Potential, pH and phase</h3>
+        <p>Below about 0.5 V vs RHE only metallic Cu works, and only on aldehydes (Liu et al., 2022). Above about 1.2 V the surface is Cu(II) oxide. pH decides whether glycerol stops at DHA or breaks to formate, and CuO beat Cu foil for formate at the same potential (Chuang &amp; Lai, 2022).</p>
+      </div>
+      <div class="factor">
+        <h3>Reconstruction and leaching</h3>
+        <p>Cu<sub>2</sub>O facets oxidize to CuO under bias, and methanol can push CuO back to Cu<sub>2</sub>O. Polyols leach copper into solution, and one glucose route runs through dissolved Cu<sup>2+</sup>. By the time products are measured, the as-made facet is gone or partly dissolved.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="vs-ni" aria-labelledby="vs-ni-h">
+    <div class="col" style="display:grid;gap:14px">
+      <h2 id="vs-ni-h">How copper differs from your NiOOH</h2>
+      <p>Copper is the better partner for the aldehyde-to-acid step and the weaker one for the alcohol-to-aldehyde step. Mixed NiOOH and Cu(OH)<sub>2</sub> electrodes outperformed either oxide alone for HMF to FDCA (Woo et al., 2022).</p>
+    </div>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th scope="col">Property</th><th scope="col" class="ni-head">NiOOH</th><th scope="col" class="cu-head">Copper oxides</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Where the oxidant forms</th>
+            <td data-label="NiOOH">Ni²⁺→Ni³⁺ wave at about 1.35–1.45 V vs RHE, before O<sub>2</sub> evolution</td>
+            <td data-label="Copper oxides">Cu(III) seen only at 1.62 V or above (Deng et al., 2016); most organic oxidation is reported on Cu(II) oxide</td>
+          </tr>
+          <tr>
+            <th scope="row">Low-potential route</th>
+            <td data-label="NiOOH">None</td>
+            <td data-label="Copper oxides">Metallic Cu oxidizes aldehydes near 0 V vs RHE and releases H<sub>2</sub> at the anode</td>
+          </tr>
+          <tr>
+            <th scope="row">Alcohol → aldehyde</th>
+            <td data-label="NiOOH">Faster</td>
+            <td data-label="Copper oxides">Slower</td>
+          </tr>
+          <tr>
+            <th scope="row">Aldehyde → acid</th>
+            <td data-label="NiOOH">Slower</td>
+            <td data-label="Copper oxides">Faster on Cu(OH)<sub>2</sub></td>
+          </tr>
+          <tr>
+            <th scope="row">O<sub>2</sub> evolution</th>
+            <td data-label="NiOOH">Competes, and trace Fe makes it worse</td>
+            <td data-label="Copper oxides">Oxidized Cu is a poor O<sub>2</sub> catalyst, which leaves a wide window (Nam et al., 2018)</td>
+          </tr>
+          <tr>
+            <th scope="row">Stability</th>
+            <td data-label="NiOOH">Phase changes (α/γ, β) but stays solid</td>
+            <td data-label="Copper oxides">Reconstructs between Cu<sub>2</sub>O and CuO; polyols leach Cu</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="col" id="controls" aria-labelledby="controls-h">
+    <h2 id="controls-h">If you run the comparison</h2>
+    <p>A clean Cu shape study with product analysis would be new. These controls separate a facet effect from the effects above.</p>
+    <ul class="checks">
+      <li>
+        <input type="checkbox" id="chk-series">
+        <label for="chk-series"><strong>Make the shapes by one route.</strong> The Huang CuCl<sub>2</sub>/SDS/NH<sub>2</sub>OH·HCl chemistry gives cubes, octahedra and rhombic dodecahedra by changing volumes, so impurities and capping agent stay the same. Match particle size.</label>
+      </li>
+      <li>
+        <input type="checkbox" id="chk-products">
+        <label for="chk-products"><strong>Quantify products, not current.</strong> Use HPLC on an organic-acid column for formate, acetate, glycolate, lactate and oxalate. ¹H NMR cannot see oxalate, which has no C–H. Report Faradaic efficiency per product.</label>
+      </li>
+      <li>
+        <input type="checkbox" id="chk-wiring">
+        <label for="chk-wiring"><strong>Wire every shape equally.</strong> Rhombic dodecahedra barely conduct (Tan et al., 2015), so mix in carbon or use thin, equal-mass films, and normalize current by double-layer capacitance as well as mass.</label>
+      </li>
+      <li>
+        <input type="checkbox" id="chk-post">
+        <label for="chk-post"><strong>Check what survived.</strong> SEM and Raman before and after electrolysis. Cu<sub>2</sub>O shows bands near 218 and 525 cm⁻¹, CuO near 296, 345 and 630 cm⁻¹. Report how much of each facet is left.</label>
+      </li>
+      <li>
+        <input type="checkbox" id="chk-icp">
+        <label for="chk-icp"><strong>Measure dissolved copper.</strong> ICP-OES of the electrolyte after each run, since leached copper can make products on its own.</label>
+      </li>
+      <li>
+        <input type="checkbox" id="chk-ph">
+        <label for="chk-ph"><strong>Fix pH and potential vs RHE.</strong> Glycerol gives DHA near pH 9 and formate in strong base, so a pH drift can look like a facet effect.</label>
+      </li>
+    </ul>
+    <p class="small">Checkmarks are saved in this browser only.</p>
+  </section>
+
+  <section id="synthesis" aria-labelledby="synthesis-h">
+    <div class="col" style="display:grid;gap:14px">
+      <h2 id="synthesis-h">Making the shapes</h2>
+      <p>Starting recipes for a shape series. The Huang-group volumes come from later papers by the same group that say they follow the original procedure; check them against the original before relying on them.</p>
+    </div>
+    <div class="recipes">
+      <article class="recipe">
+        <h3>Cu<sub>2</sub>O cubes, octahedra and rhombic dodecahedra</h3>
+        <p class="src">Kuo &amp; Huang 2008; Huang et al. 2012; volumes as given in Chu &amp; Huang 2017, ESI</p>
+        <div class="table-wrap">
+          <table class="vols">
+            <thead><tr><th scope="col">10 mL vial</th><th scope="col">Cube</th><th scope="col">Octahedron</th><th scope="col">Rhombic dodec.</th></tr></thead>
+            <tbody>
+              <tr><td>Water</td><td>9.55 mL</td><td>9.05 mL</td><td>6.92 mL</td></tr>
+              <tr><td>0.1 M CuCl<sub>2</sub></td><td>0.10 mL</td><td>0.10 mL</td><td>0.50 mL</td></tr>
+              <tr><td>SDS (solid)</td><td>0.087 g</td><td>0.087 g</td><td>0.087 g</td></tr>
+              <tr><td>1.0 M NaOH</td><td>0.20 mL</td><td>0.20 mL</td><td>0.18 mL</td></tr>
+              <tr><td>NH<sub>2</sub>OH·HCl</td><td>0.15 mL, 0.2 M</td><td>0.65 mL, 0.2 M</td><td>2.40 mL, 0.1 M</td></tr>
+              <tr><td>Growth</td><td>2 h, room temp.</td><td>2 h, room temp.</td><td>1 h, 32–34 °C</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ol>
+          <li>Add water, CuCl<sub>2</sub> and SDS; stir until clear.</li>
+          <li>Add NaOH; a light-blue Cu(OH)<sub>2</sub> suspension forms.</li>
+          <li>Inject the NH<sub>2</sub>OH·HCl quickly (within about 3 s for rhombic dodecahedra), then leave undisturbed.</li>
+          <li>Centrifuge; wash twice with 1:1 water:ethanol and once with ethanol. Avoid acid, which etches Cu<sub>2</sub>O.</li>
+        </ol>
+      </article>
+      <article class="recipe">
+        <h3>Cu<sub>2</sub>O cubes to octahedra with PVP</h3>
+        <p class="src">Zhang et al. 2009; amounts from a 2011 RSC Adv. ESI using the same route</p>
+        <ol>
+          <li>50 mL of 0.01 M CuCl<sub>2</sub> at 55 °C with PVP (MW 30,000). PVP sets the shape: 4.44 g gives octahedra, 1.67 g truncated octahedra, less gives cube-like shapes.</li>
+          <li>Add 5.0 mL of 2.0 M NaOH dropwise and stir 30 min.</li>
+          <li>Add 5.0 mL of 0.6 M ascorbic acid dropwise and age 3 h at 55 °C.</li>
+          <li>Wash repeatedly with water and ethanol; PVP is hard to remove, so check by FTIR before electrochemistry.</li>
+        </ol>
+      </article>
+      <article class="recipe">
+        <h3>Cu(OH)<sub>2</sub> and CuO nanowires on Cu foam</h3>
+        <p class="src">Wen, Zhang &amp; Yang 2003; amounts from a patent citing this route</p>
+        <ol>
+          <li>Clean Cu foam in acetone, then dilute HCl; rinse.</li>
+          <li>Immerse in 8.0 mL 10 M NaOH + 4.0 mL 1 M (NH<sub>4</sub>)<sub>2</sub>S<sub>2</sub>O<sub>8</sub> + 18.0 mL water (2.67 M NaOH, 0.133 M persulfate) at room temperature for about 15 min. The surface turns light blue.</li>
+          <li>Rinse and dry. Anneal in air at 200 °C for 1–2 h to convert the wires to CuO.</li>
+        </ol>
+      </article>
+      <article class="recipe">
+        <h3>Electrodeposited Cu<sub>2</sub>O shapes</h3>
+        <p class="src">Siegfried &amp; Choi 2004</p>
+        <ol>
+          <li>Cathodic deposition from Cu(NO<sub>3</sub>)<sub>2</sub> at about 60 °C, pH 3.3–4.9, with SDS as the shape-directing additive.</li>
+          <li>At 5 wt% SDS the pH sets the shape: cubes at pH 3.4, truncated cubes at 3.5, cuboctahedra at 3.7, truncated octahedra at 3.9.</li>
+          <li>The Cu(NO<sub>3</sub>)<sub>2</sub> concentration and deposition potential were not confirmed; take them from the paper.</li>
+        </ol>
+      </article>
+    </div>
+    <p class="col small">For a glassy carbon electrode, use the same ink as in the Ni(OH)<sub>2</sub> review: 5 mg catalyst with about 1 mg Vulcan carbon in 750 µL water, 250 µL isopropanol and 20 µL 5 wt% Nafion; 5 µL on a 3 mm disk gives about 0.35 mg cm⁻². Dry at or below 60 °C, since warm air oxidizes Cu<sub>2</sub>O.</p>
+  </section>
+
+  <section class="col" id="c3plus" aria-labelledby="c3plus-h">
+    <h2 id="c3plus-h">If you need propionate or butyrate</h2>
+    <p>Electro-oxidation on copper can only shorten or keep carbon chains, so C3–C6 VFAs from mixed organics come from acidogenic fermentation and microbial chain elongation (Agler et al., 2011; Angenent et al., 2016). In those processes electrochemistry is mostly used to extract and concentrate the acids, not to make them. A copper anode fits better downstream, turning a glycerol or ethanol side stream into formate or acetate.</p>
+  </section>
+
+  <section class="col" id="caveats" aria-labelledby="caveats-h">
+    <h2 id="caveats-h">How this was assembled</h2>
+    <ul class="plain">
+      <li>Compiled in October 2026 by six parallel literature searches, a second verification pass on every cited claim, and three searches dedicated to finding a counterexample to the short answer.</li>
+      <li>Publisher full texts were blocked in the research environment, so facts come from abstracts, landing pages and search excerpts of full texts and supporting information. Check numbers against the papers before citing them.</li>
+      <li>Potentials are vs RHE unless noted. Electrolytes and loadings differ, so values aren't comparable across rows.</li>
+      <li>Three items could not be confirmed: a 2025 Anal. Chim. Acta facet study, a 2021 ACS Catal. hollow-cuboctahedra sensor, and the authors of a Chem. Eng. J. study. Only the Chem. Eng. J. result is used here, and it is flagged.</li>
+    </ul>
+  </section>
+
+  <section class="col" id="sources" aria-labelledby="sources-h">
+    <h2 id="sources-h">Sources</h2>
+    <ul class="refs">
+      <li><h3>Copper shape and facet comparisons</h3></li>
+      <li>
+        <span>Pastrián, F. A. C.; da Silva, A. G. M.; Dourado, A. H. B.; et al.; Camargo, P. H. C.; Córdoba de Torresi, S. I. Why could the nature of surface facets lead to differences in the activity and stability of Cu<sub>2</sub>O-based electrocatalytic sensors? <i>ACS Catal.</i> 2018, 8, 6265–6272.</span>
+        <a href="https://doi.org/10.1021/acscatal.8b00726">doi.org/10.1021/acscatal.8b00726</a>
+      </li>
+      <li>
+        <span>Dourado, A. H. B.; da Silva, A. G. M.; Pastrián, F. A. C.; et al. In situ FTIR insights into the electrooxidation mechanism of glucose as a function of the surface facets of Cu<sub>2</sub>O-based electrocatalytic sensors. <i>J. Catal.</i> 2019, 375, 95–103.</span>
+        <a href="https://doi.org/10.1016/j.jcat.2019.05.032">doi.org/10.1016/j.jcat.2019.05.032</a>
+      </li>
+      <li>
+        <span>Tang, L.; Lv, J.; Kong, C.; Yang, Z.; Li, J. Facet-dependent nonenzymatic glucose sensing properties of Cu<sub>2</sub>O cubes and octahedra. <i>New J. Chem.</i> 2016, 40, 6573–6576.</span>
+        <a href="https://doi.org/10.1039/C6NJ00450D">doi.org/10.1039/C6NJ00450D</a>
+      </li>
+      <li>
+        <span>Kusior, A. Voltammetric detection of glucose: the electrochemical behavior of the copper oxide materials with well-defined facets. <i>Sensors</i> 2022, 22, 4783.</span>
+        <a href="https://doi.org/10.3390/s22134783">doi.org/10.3390/s22134783</a>
+      </li>
+      <li>
+        <span>Won, Y.-H.; Stanciu, L. A. Cu<sub>2</sub>O and Au/Cu<sub>2</sub>O particles: surface properties and applications in glucose sensing. <i>Sensors</i> 2012, 12, 13019–13033.</span>
+        <a href="https://doi.org/10.3390/s121013019">doi.org/10.3390/s121013019</a>
+      </li>
+      <li>
+        <span>Specific activities of rhombic dodecahedral, octahedral, and cubic Cu<sub>2</sub>O nanocrystals as glucose oxidation catalysts. <i>Chem. Eng. J.</i>, c. 2020. <span class="flag">authors, year and DOI unconfirmed</span></span>
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/S1385894719324040">sciencedirect.com, pii S1385894719324040</a>
+      </li>
+      <li>
+        <span>Lee, D. W.; et al.; Paik, T. N,N-Dimethylformamide-assisted shape evolution of highly uniform and shape-pure colloidal copper nanocrystals. <i>Small</i> 2021, 17(40).</span>
+        <a href="https://doi.org/10.1002/smll.202103302">doi.org/10.1002/smll.202103302</a>
+      </li>
+      <li>
+        <span>Pascual-Llorens, Chico-Mesa, Musi, Arán-Ais, Sebastián-Pascual. Pulse-mediated refaceting of copper: influence on 5-hydroxymethylfurfural electrocatalysis. <i>J. Mater. Chem. A</i> 2026.</span>
+        <a href="https://doi.org/10.1039/D6TA00313C">doi.org/10.1039/D6TA00313C</a>
+      </li>
+      <li>
+        <span>Leitner, M.; Valls Mascaró, F.; Auer, A.; Kunze-Liebhäuser, J. Facet-dependent restructuring and catalytic activity of Cu single crystals during CO electro-oxidation. <i>ACS Nano</i> 2025, 19, 42310–42318.</span>
+        <a href="https://doi.org/10.1021/acsnano.5c13881">doi.org/10.1021/acsnano.5c13881</a>
+      </li>
+      <li>
+        <span>Ma, Q.; Young, J.; Basuray, S.; Cheng, G.; Gao, J.; Yao, N.; Zhang, W. Elucidating facet dependent electronic and electrochemical properties of Cu<sub>2</sub>O nanocrystals using AFM/SCEM and DFT. <i>Nano Today</i> 2022, 101538.</span>
+        <a href="https://doi.org/10.1016/j.nantod.2022.101538">doi.org/10.1016/j.nantod.2022.101538</a>
+      </li>
+      <li>
+        <span>Shan, Y.; Deng, X.; Lu, X.; Gao, C.; Li, Y.; Chen, Q. Surface facets dependent oxygen evolution reaction of single Cu<sub>2</sub>O nanoparticles. <i>Chin. Chem. Lett.</i> 2022, 33, 5158–5161.</span>
+        <a href="https://doi.org/10.1016/j.cclet.2022.03.010">doi.org/10.1016/j.cclet.2022.03.010</a>
+      </li>
+      <li>
+        <span>Tan, C.-S.; Hsu, S.-C.; Ke, W.-H.; Chen, L.-J.; Huang, M. H. Facet-dependent electrical conductivity properties of Cu<sub>2</sub>O crystals. <i>Nano Lett.</i> 2015, 15, 2155–2160. <span class="flag">DOI unconfirmed</span></span>
+      </li>
+
+      <li><h3>Morphology, phase and product studies</h3></li>
+      <li>
+        <span>Chuang, P.-C.; Lai, Y.-H. Selective production of formate over a CuO electrocatalyst by electrochemical and photoelectrochemical biomass valorisation. <i>Catal. Sci. Technol.</i> 2022, 12, 6375–6383.</span>
+        <a href="https://doi.org/10.1039/D2CY00950A">doi.org/10.1039/D2CY00950A</a>
+      </li>
+      <li>
+        <span>Yan, Y.; et al.; Shao, M.; O'Hare, D. Field-induced reactant enrichment enhances benzyl alcohol electrooxidation coupled with hydrogen evolution. <i>Chem. Sci.</i> 2025, 16, 14646–14654.</span>
+        <a href="https://doi.org/10.1039/D5SC03582A">doi.org/10.1039/D5SC03582A</a>
+      </li>
+      <li>
+        <span>Nam, D.-H.; Taitt, B. J.; Choi, K.-S. Copper-based catalytic anodes to produce 2,5-furandicarboxylic acid, a biomass-derived alternative to terephthalic acid. <i>ACS Catal.</i> 2018, 8, 1197–1206.</span>
+        <a href="https://doi.org/10.1021/acscatal.7b03152">doi.org/10.1021/acscatal.7b03152</a>
+      </li>
+      <li>
+        <span>Sun, H.; Li, L.; Chen, Y.; Kim, Y. B.; Kim, H.; Fei, L.; Shao, Z.; Jung, W. C. Crystal structure optimization of copper oxides for the benzyl alcohol oxidation reaction. <i>Chem. Commun.</i> 2024, 60, 7224–7227.</span>
+        <a href="https://doi.org/10.1039/D4CC01751J">doi.org/10.1039/D4CC01751J</a>
+      </li>
+      <li>
+        <span>Dey, A.; Ghosh, P.; Chandrabose, G.; et al.; Krishnamurthy, S. Ultrafast epitaxial growth of CuO nanowires using atmospheric pressure plasma with enhanced electrocatalytic and photocatalytic activities. <i>Nano Select</i> 2022, 3, 627–642.</span>
+        <a href="https://doi.org/10.1002/nano.202100191">doi.org/10.1002/nano.202100191</a>
+      </li>
+      <li>
+        <span>Khan, M.; Hameed, A.; et al.; Ma, M. In situ grown oxygen-vacancy-rich copper oxide nanosheets on a copper foam electrode afford the selective oxidation of alcohols to value-added chemicals. <i>Commun. Chem.</i> 2022, 5.</span>
+        <a href="https://doi.org/10.1038/s42004-022-00708-1">doi.org/10.1038/s42004-022-00708-1</a>
+      </li>
+      <li>
+        <span>Oh, L. S.; et al.; Kim, W. B.; Kim, H. J. How to change the reaction chemistry on nonprecious metal oxide nanostructure materials for electrocatalytic oxidation of biomass-derived glycerol to renewable chemicals. <i>Adv. Mater.</i> 2023, 35, 2203285.</span>
+        <a href="https://doi.org/10.1002/adma.202203285">doi.org/10.1002/adma.202203285</a>
+      </li>
+      <li>
+        <span>Meng, K.; Fan, Z.; Wen, H.; Hu, Y.; Zhang, W.; Chen, Z. Construction of a Cu<sup>3+</sup>–OH–Pt interface for enhancing glycerol electrooxidation coupled with hydrogen evolution. <i>Green Chem.</i> 2025.</span>
+        <a href="https://doi.org/10.1039/D5GC00931F">doi.org/10.1039/D5GC00931F</a>
+      </li>
+      <li>
+        <span>Fan, R.-Y.; et al.; Dong, B. Optimized electronic modification of S-doped CuO induced by oxidative reconstruction for coupling glycerol electrooxidation with hydrogen evolution. <i>Nano-Micro Lett.</i> 2023, 15, 190.</span>
+        <a href="https://doi.org/10.1007/s40820-023-01159-6">doi.org/10.1007/s40820-023-01159-6</a>
+      </li>
+      <li>
+        <span>Braun, M.; Behrendt, G.; Krebs, M. L.; et al.; Andronescu, C. Electrooxidation of alcohols on mixed copper–cobalt hydroxycarbonates in alkaline solution. <i>ChemElectroChem</i> 2022, 9, e202200267.</span>
+        <a href="https://doi.org/10.1002/celc.202200267">doi.org/10.1002/celc.202200267</a>
+      </li>
+      <li>
+        <span>Xia, Q.; Jin, C.; Huang, Y. L.; et al. Methanol-facilitated surface reconstruction catalysts for near 200% Faradaic efficiency in a coupled system. <i>Adv. Funct. Mater.</i> 2024, 34, 2314596.</span>
+        <a href="https://doi.org/10.1002/adfm.202314596">doi.org/10.1002/adfm.202314596</a>
+      </li>
+      <li>
+        <span>Han, X.; Sheng, H.; Yu, C.; Walker, T. W.; Huber, G. W.; Qiu, J.; Jin, S. Electrocatalytic oxidation of glycerol to formic acid by CuCo<sub>2</sub>O<sub>4</sub> spinel oxide nanostructure catalysts. <i>ACS Catal.</i> 2020, 10, 6741–6752. <span class="flag">DOI unconfirmed</span></span>
+      </li>
+      <li>
+        <span>Li, G.; Han, G.; Wang, L.; Cui, X.; Moehring, N. K.; Kidambi, P. R.; Jiang, D.-e.; Sun, Y. Dual hydrogen production from electrocatalytic water reduction coupled with formaldehyde oxidation via a copper–silver electrocatalyst. <i>Nat. Commun.</i> 2023, 14.</span>
+        <a href="https://doi.org/10.1038/s41467-023-36142-7">doi.org/10.1038/s41467-023-36142-7</a>
+      </li>
+      <li>
+        <span>Ostervold, L.; Perez Bakovic, S. I.; Hestekin, J.; Greenlee, L. F. Electrochemical biomass upgrading: degradation of glucose to lactic acid on a copper(II) electrode. <i>RSC Adv.</i> 2021, 11, 31208–31218.</span>
+        <a href="https://doi.org/10.1039/D1RA06737K">doi.org/10.1039/D1RA06737K</a>
+      </li>
+      <li>
+        <span>Liu, C.; Hirohara, M.; Maekawa, T.; Chang, R.; Hayashi, T.; Chiang, C.-Y. Selective electro-oxidation of glycerol to dihydroxyacetone by a non-precious electrocatalyst: CuO. <i>Appl. Catal. B</i> 2020, 265, 118543.</span>
+        <a href="https://doi.org/10.1016/j.apcatb.2019.118543">doi.org/10.1016/j.apcatb.2019.118543</a>
+      </li>
+
+      <li><h3>Mechanism and comparison with nickel</h3></li>
+      <li>
+        <span>Deng, Y.; Handoko, A. D.; Du, Y.; Xi, S.; Yeo, B. S. In situ Raman spectroscopy of copper and copper oxide surfaces during electrochemical oxygen evolution reaction: identification of Cu<sup>III</sup> oxides as catalytically active species. <i>ACS Catal.</i> 2016, 6, 2473–2481.</span>
+        <a href="https://doi.org/10.1021/acscatal.6b00205">doi.org/10.1021/acscatal.6b00205</a>
+      </li>
+      <li>
+        <span>Liu, H.; Agrawal, N.; Ganguly, A.; et al.; Janik, M. J.; Li, W. Ultra-low voltage bipolar hydrogen production from biomass-derived aldehydes and water in membrane-less electrolyzers. <i>Energy Environ. Sci.</i> 2022, 15, 4175–4189.</span>
+        <a href="https://doi.org/10.1039/D2EE01427K">doi.org/10.1039/D2EE01427K</a>
+      </li>
+      <li>
+        <span>Woo, J.; Moon, B. C.; Lee, U.; Oh, H.-S.; Chae, K. H.; Jun, Y.; Min, B. K.; Lee, D. K. Collaborative electrochemical oxidation of the alcohol and aldehyde groups of 5-hydroxymethylfurfural by NiOOH and Cu(OH)<sub>2</sub> for superior 2,5-furandicarboxylic acid production. <i>ACS Catal.</i> 2022, 12, 4078–4091.</span>
+        <a href="https://doi.org/10.1021/acscatal.1c05341">doi.org/10.1021/acscatal.1c05341</a>
+      </li>
+      <li>
+        <span>Mou, et al. Glycerol electrooxidation over precision-synthesized gold nanocrystals with different surface facets. <i>Precis. Chem.</i> 2024, 2, 103–111. The same shape-and-product design, done on gold.</span>
+        <a href="https://doi.org/10.1021/prechem.3c00105">doi.org/10.1021/prechem.3c00105</a>
+      </li>
+
+      <li><h3>Synthesis</h3></li>
+      <li>
+        <span>Kuo, C.-H.; Huang, M. H. Facile synthesis of Cu<sub>2</sub>O nanocrystals with systematic shape evolution from cubic to octahedral structures. <i>J. Phys. Chem. C</i> 2008, 112, 18355–18360.</span>
+      </li>
+      <li>
+        <span>Huang, W.-C.; Lyu, L.-M.; Yang, Y.-C.; Huang, M. H. Synthesis of Cu<sub>2</sub>O nanocrystals from cubic to rhombic dodecahedral structures and their comparative photocatalytic activity. <i>J. Am. Chem. Soc.</i> 2012, 134, 1261–1267.</span>
+      </li>
+      <li>
+        <span>Chu, Huang. Huang-group procedure with per-shape volumes, <i>J. Mater. Chem. A</i> 2017, ESI. <span class="flag">title not confirmed</span></span>
+        <a href="https://doi.org/10.1039/C7TA03848H">doi.org/10.1039/C7TA03848H</a>
+      </li>
+      <li>
+        <span>Zhang, D.-F.; Zhang, H.; Guo, L.; Zheng, K.; Han, X.-D.; Zhang, Z. Delicate control of crystallographic facet-oriented Cu<sub>2</sub>O nanocrystals and the correlated adsorption ability. <i>J. Mater. Chem.</i> 2009, 19, 5220–5225.</span>
+        <a href="https://doi.org/10.1039/B816349A">doi.org/10.1039/B816349A</a>
+      </li>
+      <li>
+        <span>Wen, X.; Zhang, W.; Yang, S. Synthesis of Cu(OH)<sub>2</sub> and CuO nanoribbon arrays on a copper surface. <i>Langmuir</i> 2003, 19, 5898–5903.</span>
+      </li>
+      <li>
+        <span>Siegfried, M. J.; Choi, K.-S. Electrochemical crystallization of cuprous oxide with systematic shape evolution. <i>Adv. Mater.</i> 2004, 16, 1743–1746.</span>
+        <a href="https://doi.org/10.1002/adma.200400177">doi.org/10.1002/adma.200400177</a>
+      </li>
+
+      <li><h3>VFA context</h3></li>
+      <li>
+        <span>Agler, M. T.; Wrenn, B. A.; Zinder, S. H.; Angenent, L. T. Waste to bioproduct conversion with undefined mixed cultures: the carboxylate platform. <i>Trends Biotechnol.</i> 2011, 29, 70–78. <span class="flag">not rechecked</span></span>
+        <a href="https://doi.org/10.1016/j.tibtech.2010.11.006">doi.org/10.1016/j.tibtech.2010.11.006</a>
+      </li>
+      <li>
+        <span>Angenent, L. T.; Richter, H.; Buckel, W.; et al. Chain elongation with reactor microbiomes: open-culture biotechnology to produce biochemicals. <i>Environ. Sci. Technol.</i> 2016, 50, 2796–2810. <span class="flag">not rechecked</span></span>
+        <a href="https://doi.org/10.1021/acs.est.5b04847">doi.org/10.1021/acs.est.5b04847</a>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    var KEY = "cu-review-checks";
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+    document.querySelectorAll('.checks input[type="checkbox"]').forEach(function (box) {
+      if (state[box.id]) box.checked = true;
+      box.addEventListener("change", function () {
+        state[box.id] = box.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      });
+    });
+  })();
+</script>
